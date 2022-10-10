@@ -1,15 +1,9 @@
-const express = require("express");
-
-import emojis from "./emojis";
+import express from "express";
+import authors from "./authors";
+import jobs from "./jobs";
 
 const router = express.Router();
-
-router.get("/", (req: any, res: any) => {
-  res.json({
-    message: "API - 👋🌎🌍🌏",
-  });
-});
-
-router.use("/emojis", emojis);
+router.use("/authors", authors);
+router.use("/jobs", jobs);
 
 export default router;

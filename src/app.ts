@@ -9,7 +9,6 @@ const app: Application = express();
 
 const middlewares = require("./middlewares");
 
-import routes from "./routes";
 import api from "./api";
 
 app.use(morgan("dev"));
@@ -23,8 +22,7 @@ app.get("/", (req: Request, res: Response) => {
   });
 });
 
-// app.use("/api", routes);
-app.use("/api/v1", routes);
+app.use("/api/v1", api);
 
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);

@@ -1,4 +1,5 @@
-import winston from "winston";
+import winston, { format } from "winston";
+const { combine, timestamp } = format;
 
 const logger = winston.createLogger({
   level: "info",
@@ -21,7 +22,7 @@ const logger = winston.createLogger({
 if (process.env.NODE_ENV !== "production") {
   logger.add(
     new winston.transports.Console({
-      format: winston.format.simple(),
+      format: combine(winston.format.simple(), timestamp()),
     })
   );
 }
