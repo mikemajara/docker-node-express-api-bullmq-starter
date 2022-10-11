@@ -9,44 +9,47 @@ export const connection: ConnectionOptions = {
   password: process.env.REDIS_PASSWORD,
 };
 
-export const queue = new Queue(TASK_QUEUE, { connection });
+export const getQueue = () => {
+  const queue = new Queue(TASK_QUEUE, { connection });
 
-queue
-  .waitUntilReady()
-  .then((data) => {
-    logger.info(`Queue ready!`);
-  })
-  .catch((err) => {
-    logger.error(`Unexpected error instancing queue`, err);
+  queue
+    .waitUntilReady()
+    .then((data) => {
+      logger.info(`Queue ready!`);
+    })
+    .catch((err) => {
+      logger.error(`Unexpected error instancing queue`, err);
+    });
+
+  queue.on("cleaned", (job, type) => {
+    logger.info(`cleaned. job: ${job}, type: ${type}`);
   });
 
-queue.on("cleaned", (job, type) => {
-  logger.info(`cleaned. job: ${job}, type: ${type}`);
-});
+  queue.on("error", (err) => {
+    logger.error(err);
+  });
 
-queue.on("error", (err) => {
-  logger.error(err);
-});
+  queue.on("ioredis:close", () => {
+    logger.info(`ioredis:close`);
+  });
 
-queue.on("ioredis:close", () => {
-  logger.info(`ioredis:close`);
-});
+  queue.on("paused", () => {
+    logger.info("paused");
+  });
 
-queue.on("paused", () => {
-  logger.info("paused");
-});
+  queue.on("progress", (job, progress) => {
+    logger.info(`progress. job ${job}, progress: ${progress}`);
+  });
 
-queue.on("progress", (job, progress) => {
-  logger.info(`progress. job ${job}, progress: ${progress}`);
-});
+  queue.on("removed", (job) => {
+    logger.info(`removed. job ${job.id}`);
+  });
+  queue.on("resumed", () => {
+    logger.info("resumed");
+  });
 
-queue.on("removed", (job) => {
-  logger.info(`removed. job ${job.id}`);
-});
-queue.on("resumed", () => {
-  logger.info("resumed");
-});
-
-queue.on("waiting", (job) => {
-  logger.info(`waiting ${job.id}`);
-});
+  queue.on("waiting", (job) => {
+    logger.info(`waiting ${job.id}`);
+  });
+  return queue;
+};

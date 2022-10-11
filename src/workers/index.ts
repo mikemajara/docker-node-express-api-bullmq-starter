@@ -1,6 +1,8 @@
 import { Job, Worker } from "bullmq";
 import { logger } from "../lib/logger";
-import { TASK_QUEUE, connection } from "../queue";
+import { TASK_QUEUE, connection, getQueue } from "../queue";
+
+export const queue = getQueue();
 
 const worker = new Worker(
   TASK_QUEUE,

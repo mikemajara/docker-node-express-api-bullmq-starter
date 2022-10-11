@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response, Router } from "express";
-import { queue } from "../../queue";
+import { queue } from "../../workers";
 import { logger } from "../../lib/logger";
 
 const router = Router();
