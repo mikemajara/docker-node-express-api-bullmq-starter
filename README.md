@@ -34,7 +34,7 @@ Docker is optional and you can either use it (1) for development or (2) install 
 
 Redis is not optional; it is required by BullMQ, so you will need Redis to work with Queues.
 
-You can get it running with very simple steps in MacOS by `brew install redis && brew services start redis`. This will start redis on 127.0.0.1:6379. Docker will too start an instance of this one too.
+You can get it running with very simple steps in MacOS by `brew install redis && brew services start redis`. This will start redis on 127.0.0.1:6379. Docker will also start an instance of this one too.
 - The local one doesn't need a password.
 - The one running in docker **needs a password**. Since Redis runs by default on [protected mode](https://redis.io/docs/manual/security/), it contains a password to access it to prevent a connection error.
 
