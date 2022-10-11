@@ -9,15 +9,25 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
   // if (await queue.getJob(name)) {
   //   await queue.remove(name);
   // }
-  const job = await queue.add(name, data);
-  logger.info(`job added. job ${JSON.stringify(job.asJSON(), null, 2)}`);
-  res.send(`Job ${name} added! ID: ${job.id}`);
+  const job = await queue.add(name, data, {
+    ...options,
+    removeOnComplete: true,
+  });
+  logger.info(`Added job ${JSON.stringify(job.asJSON(), null, 2)}`);
+  res.json(job);
 });
 
-router.get("/", async (req: Request, res: Response, next: NextFunction) => {
-  const { name, data } = req.body;
-  res.json(await queue.getJobs());
-});
+router.get(
+  "/:jobId?",
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { jobId } = req.params;
+    if (jobId) {
+      res.json(await queue.getJob(jobId));
+    } else {
+      res.json(await queue.getJobs());
+    }
+  }
+);
 
 router.delete(
   "/:jobId?",
@@ -25,17 +35,12 @@ router.delete(
     const { jobId } = req.params;
     if (jobId) {
       const result = await queue.remove(jobId);
-      logger.info(`Result of deleting ${jobId} ${result}`);
-      res.send(`Removed job ${jobId}`);
-    } else if (jobId === "all") {
-      let jobs = queue.getJobs();
-      logger.info(`Deleting jobs ${JSON.stringify(jobs)}`);
+      logger.info(`Deleted job ${jobId}`);
     } else {
       const result = await queue.clean(0, 100);
-      logger.info(`Result of deleting ${jobId} ${result}`);
+      logger.info(`Deleted jobs ${result}`);
     }
-    // await queue.close();
-    res.send(`Delete completed!`);
+    res.json(await queue.getJobs());
   }
 );
 

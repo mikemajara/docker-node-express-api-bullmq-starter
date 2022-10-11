@@ -1,12 +1,28 @@
 version: "3.8"
 
 services:
+  node:
+    image: "node:14.20"
+    user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./:/home/node/app
+    ports:
+      - 3001:3001
+    command: "yarn dev"
+    depends_on:
+      - redis
+
   redis:
     build: .
     volumes:
       - redis_data:/data
-    # environment:
     ports:
       - 6379:6379
+
+
 volumes:
   redis_data:
+  # redis.conf:

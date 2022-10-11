@@ -23,7 +23,9 @@ worker.on("closing", (msg) => {
   logger.info(`closing. msg: ${msg}`);
 });
 worker.on("completed", (job, result) => {
-  logger.info(`completed.  job: ${job.id}, result: ${result}`);
+  logger.info(
+    `completed.  job: ${job.name} (ID: ${job.id}), result: ${result}`
+  );
 });
 worker.on("drained", () => {
   logger.info(`drained. `);
