@@ -18,6 +18,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@types/winston": "^2.4.4",
     "bullmq": "^2.2.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
