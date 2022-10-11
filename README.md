@@ -12,7 +12,7 @@ The title is quite large, so let's get to the stack.
 
 NodeJS for the server, express for the framework API, Typescript to keep types tight, BullMQ for queue management, Docker for development out of the box.
 
-## 🏎️ Quick start 🏎️
+## 🏎️ Quick start
 
 ```
 yarn
@@ -72,7 +72,7 @@ This project is an unopinionated simple way to get started with APIs, and queue 
 
 This was originally intended to deal with jobs that were larger than 50MB (AWS Lambda doens't like those, and Vercel only likes what AWS Lambda can swallow). After some cumbersome refactoring, and finding out that 
 
-# Disclaimer ⚠️
+# ⚠️ Disclaimer 
 
 This is not an educational package, nor is it ready for production. This is just a starter kit that can be useful to start scafolding your side-hustle, without having to prune the whole structure right from the start, or without having to build it all from zero.
 
