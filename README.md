@@ -68,9 +68,9 @@ Development utilities:
 
 ## 💪 Motivation 
 
-This project is an unopinionated simple way to get started with APIs, and queue management in NodeJS. When looking for project templates in react, or NextJS, there are plenty. When it comes to NodeJS, starter kits tend to be (1) opinionated, overly complex(https://github.com/ljlm0402/typescript-express-starter), lacking instructions, or too extent to focus on what's important. [1](https://github.com/ljlm0402/typescript-express-starter), [2](https://github.com/helmuthdu/typescript-express-api-starter) are some examples.
+This project is an unopinionated simple way to get started with APIs, and queue management in NodeJS. When looking for project templates in react, or NextJS, there are plenty. When it comes to NodeJS, starter kits tend to be (1) opinionated or overly complex, lacking simple instructions, or too extent to focus on what's important. [1](https://github.com/ljlm0402/typescript-express-starter), [2](https://github.com/helmuthdu/typescript-express-api-starter) are some examples.
 
-This was originally intended to deal with jobs that were larger than 50MB (AWS Lambda doens't like those, and Vercel only likes what AWS Lambda can swallow). After some cumbersome refactoring, and finding out that 
+The aim of this project is to give you a starting point with minimal configuration and code for an api with the stack that's listed above.
 
 ## ⚠️ Disclaimer 
 
